@@ -1,6 +1,6 @@
 # vueFrame
 
-> vue2+vuex+jquery+ElementUI+webpack+scss+es6+简单日历显示
+> vue2+vuex+vue-router+jquery+ElementUI+webpack+scss+es6+简单日历显示
 
 ## Build Setup
 

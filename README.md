@@ -62,6 +62,7 @@ list 为列表类型	eg:demo-2
 ## event
 ---
 ```
+today		点击今天回调   		(data:Object 今天日期)    
 next:		点击下个月回调	      (data:Object 返回下月1号)    
 prev:		点击上个月回调	      (data:Object 返回上月1号)	 
 choosed:	选中日期时回调     (data:Object 返回当前日期)	

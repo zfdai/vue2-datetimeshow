@@ -8,13 +8,13 @@
   	<br/>
   	<br/>
   	<date-time-show 
-  	:type = "selectType"
-    @today="today"
-	@next="next"
-	@prev="prev"
-	@choosed="choosed"
-	@yearchange="yearchange"
-	@monthchange="monthchange"
+      :type = "selectType"
+     @today="today"
+	   @next="next"
+	   @prev="prev"
+	   @choosed="choosed"
+	   @yearchange="yearchange"
+	   @monthchange="monthchange"
   	></date-time-show>
   </div>
 </template>

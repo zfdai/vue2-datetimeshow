@@ -31,16 +31,24 @@ npm run build
 ## 图例
 	#demo-0
 ![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-0.png)
+---
 	#demo-1
 ![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-1.png)
+---
 	#demo-2
 ![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-2.png)
+---
 	#others
 ![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-3.png)
+---
 ![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-4.png)
+---
 ![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-5.png)
+---
 ![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-6.png)
+---
 ![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-7.png)
+---
 ## props
 ```
 ---

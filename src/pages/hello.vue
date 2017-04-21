@@ -22,8 +22,8 @@ export default {
     }
   },
   created(){
-    // 初始化 数据  --可用
-   this.init();
+    // 初始化数据
+   // this.init();
   },
   methods:{
     init(){

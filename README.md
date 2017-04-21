@@ -1,6 +1,9 @@
-# vuenewframe
+# vueFrame
 
-> vue2+vuex+jquery+ElementUI+webpack+scss+es6+简单日历显示
+> vue2+vuex+vue-router+jquery+ElementUI+webpack+scss+es6+简单日历显示
+
+# 外部链接
+<a href="https://cn.vuejs.org/" target="_blank">vue2</a>
 
 # 联系
 Email:1184554547@qq.com
@@ -51,11 +54,11 @@ list 为列表类型	eg:demo-2
 ## event
 ---
 ```
-next:		点击下个月回调	 (data:Object 返回下月1号)    
-prev:		点击上个月回调	 (data:Object 返回上月1号)	 
+next:		点击下个月回调	      (data:Object 返回下月1号)    
+prev:		点击上个月回调	      (data:Object 返回上月1号)	 
 choosed:	选中日期时回调     (data:Object 返回当前日期)	
 yearchange:	年份下拉回调		 (data:Number 返回年份)		
-monthchange:月份下拉选中回调	 (data:Number 返回月份)
+monthchange:月份下拉选中回调	(data:Number 返回月份)
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

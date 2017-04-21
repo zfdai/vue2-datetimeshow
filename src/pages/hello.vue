@@ -14,7 +14,7 @@
   
 </style>
 <script>
-import {getNews} from '@src/services/service.js'
+import api_url from '@src/config/url'
 export default {
   data () {
     return {
@@ -23,13 +23,13 @@ export default {
   },
   created(){
     // 初始化 数据  --可用
-   // this.init();
+   this.init();
   },
   methods:{
     init(){
-      getNews({page:1,page_size:10}).then((res)=>{
-        console.log('res',res)
-      },()=>{})
+      axios.get(api_url.infoNews).then((data)=>{
+        console.log('data',data);
+      })
     }
   }
 }

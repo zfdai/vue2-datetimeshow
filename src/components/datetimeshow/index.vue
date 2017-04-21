@@ -261,6 +261,7 @@
   	}
 </style>
 <script>
+import domTool from '../../tool/domOperate'
 export default {
 	props:['type'],
   	data () {
@@ -364,19 +365,20 @@ export default {
     			_day = _date.getDate(),
     			// _timeStr = _year + '-' _month + '-' + _day;
     			_timeStr = `${_year}-${_month+1}-${_day}`,
-    			_todayEle = this.type!=='list'?$('[datetime='+_timeStr+']','.zf-body'):
-    						$('[datetime='+_timeStr+'] .list-day','.zf-body'),
-    			_curr_dateEle = $('.curr-date','.zf-body');
-    			if(_curr_dateEle.length>=1) _curr_dateEle.removeClass('curr-date');
-    			if(_todayEle.length>=1) _todayEle.addClass('curr-date');
+    			_todayEle = this.type!=='list'?
+    						document.querySelectorAll('[datetime="'+_timeStr+'"]'):
+    						document.querySelectorAll('[datetime="'+_timeStr+'"] .list-day'),
+    			_curr_dateEle = document.querySelectorAll('.zf-body .curr-date');
+    			if(_curr_dateEle.length>=1) domTool.removeClass(_curr_dateEle[0],'curr-date');
+    			if(_todayEle.length>=1) domTool.addClass(_todayEle[0],'curr-date');
     	},
     	//设置选中日期
     	setChoosedStyle(){
     		if(!this.choosedDateTime) return;
-    		let _choosedEle = $('[datetime='+this.choosedDateTime+']','.zf-body'),
-    			_oldChoosedEle = $('.choosedTime','.zf-body');
-				if(_oldChoosedEle.length>0) _oldChoosedEle.removeClass('choosedTime');
-				if(_choosedEle.length>0) _choosedEle.addClass('choosedTime');
+    		let _choosedEle = document.querySelectorAll('.zf-body [datetime="'+this.choosedDateTime+'"]'),
+    			_oldChoosedEle = document.querySelectorAll('.zf-body .choosedTime');
+				if(_oldChoosedEle.length>0) domTool.removeClass(_oldChoosedEle[0],'choosedTime');
+				if(_choosedEle.length>0)  domTool.addClass(_choosedEle[0],'choosedTime');
     	},
     	// 月天数
     	getDaysOfMonth(){
@@ -441,13 +443,20 @@ export default {
     		this.isShowChooseYears = !this.isShowChooseYears;
     		// 定位当前年份与加样式
     		let	_old_year = this.datetime.getFullYear(),
-    			_yearEle = $('[data-year='+_old_year+']','.years-wrap'),
-    			_yearWrapEle = $('.years-wrap','.zf-years'),
-    			_ulEle = $('ul','.years-wrap');
+    			_oldYearEle = document.querySelectorAll('.years-wrap .active'),
+    			_yearEle = document.querySelectorAll('.years-wrap [data-year="'+_old_year+'"]'),
+    			_yearWrapEle = document.querySelectorAll('.zf-years .years-wrap'),
+    			_ulEle = document.querySelectorAll('.years-wrap ul');
     		this.$nextTick(()=>{
-    			_yearEle.addClass('active').siblings().removeClass('active');
-    			// 滚动到当前年份
-    			_yearWrapEle.scrollTop(_yearEle.position().top);
+    			domTool.removeClass(_oldYearEle[0],'active');
+    			domTool.addClass(_yearEle[0],'active');
+    			// console.log('_yearEle[0].offsetTop',_yearEle[0].offsetTop);
+    			// console.log('_yearWrapEle[0].offsetTop',_yearWrapEle[0].offsetTop);
+    			// 滚动到当前年份 _yearEle[0].offsetTop为相对于offsetParent元素:“ul”的距离
+    			// offsetTop为一个元素相对于器offsetParent的top位置。
+    			// offsetParent为元素的中距离其最近的一个父元素，这个父元素的position属性为absolute或relative的
+    			_yearWrapEle[0].scrollTop = _yearEle[0].offsetTop;//_yearEle.position().top
+    			// console.log(_yearEle);
     		})
     	},
     	// 设置年份
@@ -463,13 +472,16 @@ export default {
     		this.isShowChooseMonths = !this.isShowChooseMonths;
     		// 加样式
     		let	_old_month = this.datetime.getMonth(),
-    			_monthEle = $('[data-month='+(_old_month+1)+']','.months-wrap'),
-    			_monthWrapEle = $('.months-wrap','.zf-months'),
-    			_ulEle = $('ul','.months-wrap');
+    			_monthEle = document.querySelectorAll('.months-wrap [data-month="'+(_old_month+1)+'"]'),
+    			_oldMonthEle = document.querySelectorAll('.months-wrap li.active'),
+    			_monthWrapEle = document.querySelectorAll('.zf-months .months-wrap'),
+    			_ulEle = document.querySelectorAll('.months-wrap ul');
+    			// $('ul','.months-wrap');
     		this.$nextTick(()=>{
-    			_monthEle.addClass('active').siblings().removeClass('active');
+    			domTool.removeClass(_oldMonthEle[0],'active');
+    			domTool.addClass(_monthEle[0],'active');
     			// 滚动到当前年份
-    			_monthWrapEle.scrollTop(_monthEle.position().top);
+    			_monthWrapEle[0].scrollTop = _monthEle[0].offsetTop;
     		})
     	},
     	// 设置月份

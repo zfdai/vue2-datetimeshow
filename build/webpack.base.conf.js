@@ -43,7 +43,7 @@ module.exports = {
       '@src': resolve('src'),
       '@static': resolve('static'),
       'inMindConfig':path.resolve(__dirname, global_config_file),
-      'jquery':'jquery'
+      'axios':'axios'
     }
   },
   module: {
@@ -87,8 +87,7 @@ module.exports = {
   },
   plugins:[
     new webpack.ProvidePlugin({
-          $: "jquery",
-          jQuery: "jquery"
+          axios: "axios"
     })
   ]
 }

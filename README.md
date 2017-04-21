@@ -1,5 +1,5 @@
 # vueFrame
-> vue2+vuex+vue-router+jquery+ElementUI+webpack+scss+es6+简单日历显示
+> vue2+vuex+vue-router+axios+ElementUI+webpack+scss+es6+简单日历显示
 
 # 联系本人
 >Email:1184554547@qq.com
@@ -8,6 +8,7 @@
 <ul>
 	<li><a href="https://cn.vuejs.org/">vue2</a></li>
 	<li><a href="http://vuex.vuejs.org/">vuex</a></li>
+	<li><a href="https://github.com/mzabriskie/axios">axios</a></li>
 	<li><a href="http://element.eleme.io/#/zh-CN">ElementUI</a></li>
 </ul>
 

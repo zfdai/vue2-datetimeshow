@@ -5,8 +5,8 @@ import App from './App'
 import router from './router'
 import store from './store/index.js'
 // ajax配置
-import ajaxConfig from './config/ajax_config.js'
-ajaxConfig.init();
+import axiosConfig from './config/axios_config.js'
+axiosConfig.init();
 // 公共css
 import './assets/scss/common/_reset.scss'
 import './assets/scss/common/_style.scss'

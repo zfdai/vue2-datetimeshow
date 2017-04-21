@@ -1,6 +1,6 @@
 # vuenewframe
 
-> A Vue.js project
+> vue2+vuex+jquery+ElementUI+webpack+scss+es6+简单日历显示
 
 ## Build Setup
 
@@ -12,19 +12,13 @@ npm install
 npm run dev
 
 # build for production with minification
+# 测试环境打包 配置文件/src/config/global_test.js
+npm run test
+
+# build for production with minification
+# 生产环境 配置文件/src/config/global_prod.js
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

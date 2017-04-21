@@ -1,14 +1,15 @@
 # vueFrame
-
 > vue2+vuex+vue-router+jquery+ElementUI+webpack+scss+es6+简单日历显示
 
-# 联系
-Email:1184554547@qq.com
+# 联系本人
+>Email:1184554547@qq.com
 ---
 # 外部链接
-<a href="https://cn.vuejs.org/">vue2</a>
-<a href="http://vuex.vuejs.org/">vuex</a>
-<a href="http://element.eleme.io/#/zh-CN">ElementUI</a>
+<ul>
+	<li><a href="https://cn.vuejs.org/">vue2</a></li>
+	<li><a href="http://vuex.vuejs.org/">vuex</a></li>
+	<li><a href="http://element.eleme.io/#/zh-CN">ElementUI</a></li>
+</ul>
 ---
 ## Build Setup
 

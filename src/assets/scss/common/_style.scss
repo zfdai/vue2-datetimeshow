@@ -1,0 +1,7 @@
+@import "./variable";
+@import "./keyframes";
+@import "./mixin";
+
+a{
+	color:$abase;
+}

@@ -2,6 +2,9 @@
 
 > vue2+vuex+vue-router+jquery+ElementUI+webpack+scss+es6+简单日历显示
 
+# 外部链接
+<a href="https://cn.vuejs.org/" target="_blank">vue2</a>
+
 ## Build Setup
 
 ``` bash

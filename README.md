@@ -23,25 +23,27 @@ npm run build
 ## 图例
 >项目运行首页
 	#demo-0
-![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-0.jpg)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-0.png)
 	#demo-1
-![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-1.jpg)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-1.png)
 	#demo-2
-![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-2.jpg)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-2.png)
 	#others
-![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-3.jpg)
-![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-4.jpg)
-![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-5.jpg)
-![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-6.jpg)
-![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-7.jpg)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-3.png)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-4.png)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-5.png)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-6.png)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-7.png)
 ## props
 ```
 ---
-#type
 type:'grid'|'list' 
 grid 为图表类型 	eg:demo-1
 list 为列表类型	eg:demo-2
-#event
+```
+## event
+---
+```
 next:		点击下个月回调	 (data:Object 返回下月1号)    
 prev:		点击上个月回调	 (data:Object 返回上月1号)	 
 choosed:	选中日期时回调     (data:Object 返回当前日期)	

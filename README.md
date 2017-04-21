@@ -16,9 +16,37 @@ npm run dev
 npm run test
 
 # build for production with minification
-# 生产环境 配置文件/src/config/global_prod.js
+# 生产环境打包 配置文件/src/config/global_prod.js
 npm run build
-
+---
+```
+## 图例
+>项目运行首页
+	#demo-0
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-0.jpg)
+	#demo-1
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-1.jpg)
+	#demo-2
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-2.jpg)
+	#others
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-3.jpg)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-4.jpg)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-5.jpg)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-6.jpg)
+![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-7.jpg)
+## props
+```
+---
+#type
+type:'grid'|'list' 
+grid 为图表类型 	eg:demo-1
+list 为列表类型	eg:demo-2
+#event
+next:		点击下个月回调	 (data:Object 返回下月1号)    
+prev:		点击上个月回调	 (data:Object 返回上月1号)	 
+choosed:	选中日期时回调     (data:Object 返回当前日期)	
+yearchange:	年份下拉回调		 (data:Number 返回年份)		
+monthchange:月份下拉选中回调	 (data:Number 返回月份)
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

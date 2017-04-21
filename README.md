@@ -2,6 +2,14 @@
 
 > vue2+vuex+jquery+ElementUI+webpack+scss+es6+简单日历显示
 
+# 联系
+Email:1184554547@qq.com
+---
+# 外部链接
+<a href="https://cn.vuejs.org/">vue2</a>
+<a href="http://vuex.vuejs.org/">vuex</a>
+<a href="http://element.eleme.io/#/zh-CN">ElementUI</a>
+---
 ## Build Setup
 
 ``` bash
@@ -18,10 +26,9 @@ npm run test
 # build for production with minification
 # 生产环境打包 配置文件/src/config/global_prod.js
 npm run build
----
 ```
+---
 ## 图例
->项目运行首页
 	#demo-0
 ![image](https://github.com/zfdai/vueFrame-datetimeshow/raw/master/screenshots/demo-0.png)
 	#demo-1

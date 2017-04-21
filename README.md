@@ -1,4 +1,4 @@
-# vuenewframe
+# vueFrame
 
 > vue2+vuex+jquery+ElementUI+webpack+scss+es6+简单日历显示
 

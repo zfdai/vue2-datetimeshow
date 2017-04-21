@@ -38,13 +38,7 @@ export default {
     	selectType:'grid',
     }
   },
-  created(){
-  	this.init();
-  },
   methods:{
-  	init(){
-  		this.datetime = new Date();
-  	},
   	next(data){
   		console.log('我点击了下一个月按钮～',data)
   	},

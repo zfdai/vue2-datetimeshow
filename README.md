@@ -37,7 +37,7 @@ npm run build
 ## props
 ```
 ---
-type:'grid'|'list' 
+type:'grid'(默认)|'list' 
 grid 为图表类型 	eg:demo-1
 list 为列表类型	eg:demo-2
 ```

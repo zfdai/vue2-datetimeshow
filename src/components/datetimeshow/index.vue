@@ -430,6 +430,11 @@ export default {
     	toToday(){
     		this.datetime = new Date();
     		this.initDate();
+    		let _year = this.datetime.getFullYear(),
+    			_month = this.datetime.getMonth()+1,
+    			_day = this.datetime.getDate(),
+    			_exchangeYM = this.exchangeYearMonth(_year,_month,_day);
+    		this.$emit('today',_exchangeYM);
     	},
     	// 初始化年份
     	initYears(){

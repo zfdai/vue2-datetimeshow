@@ -9,6 +9,7 @@
   	<br/>
   	<date-time-show 
   	:type = "selectType"
+    @today="today"
 	@next="next"
 	@prev="prev"
 	@choosed="choosed"
@@ -39,6 +40,9 @@ export default {
     }
   },
   methods:{
+    today(data){
+      console.log('我点击今天～',data)
+    },
   	next(data){
   		console.log('我点击了下一个月按钮～',data)
   	},

@@ -28,7 +28,6 @@
   }
 </style>
 <script>
-
 import dateTimeShow from '../components/datetimeshow/index'
 export default {
 	components:{

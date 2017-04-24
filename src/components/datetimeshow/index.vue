@@ -460,7 +460,8 @@ export default {
     			// 滚动到当前年份 _yearEle[0].offsetTop为相对于offsetParent元素:“ul”的距离
     			// offsetTop为一个元素相对于器offsetParent的top位置。
     			// offsetParent为元素的中距离其最近的一个父元素，这个父元素的position属性为absolute或relative的
-    			_yearWrapEle[0].scrollTop = _yearEle||_yearEle[0].offsetTop;//_yearEle.position().top
+    			console.log(_yearEle);
+    			_yearWrapEle[0].scrollTop = _yearEle?_yearEle[0].offsetTop:0;//_yearEle.position().top
     			// console.log(_yearEle);
     		})
     	},

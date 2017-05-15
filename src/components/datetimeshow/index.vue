@@ -96,6 +96,7 @@
 	$body-height:300px;
 	.datetimeshow{
 		font-size: 16px;
+		text-align: center;
 	}
 	.zf-header{
 		height: $header-height;

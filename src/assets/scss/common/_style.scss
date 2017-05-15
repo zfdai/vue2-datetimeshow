@@ -3,6 +3,10 @@
 @import "./mixin";
 
 // 公共
+.relative{
+	position: relative;
+	z-index: 10;
+}
 .center-flex{
 	@include mx-center;
 }

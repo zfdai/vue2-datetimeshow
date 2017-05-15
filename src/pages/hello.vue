@@ -11,7 +11,10 @@
 </template>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  
+  @import 'src/assets/scss/common/variable';
+  p{
+    color:$abase;
+  }
 </style>
 <script>
 import api_url from '@src/config/url'
@@ -23,7 +26,7 @@ export default {
   },
   created(){
     // 初始化数据
-   // this.init();
+   this.init();
   },
   methods:{
     init(){

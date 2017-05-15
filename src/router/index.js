@@ -4,27 +4,39 @@ import childRouterView from '@src/pages/common/childRouterView'
 
 Vue.use(Router)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      component: childRouterView,
-      children:[
-      	{
-      		path:'/home',
-      		name:'home',
-      		component: resolve => require(['../pages/hello'],resolve),
-      	},
+// 子路由配置
+let _childRouterConfig = [
+        {
+          path:'/index',
+          name:'index',
+          component: resolve => require(['../pages/index'],resolve),
+        },
         {
           path:'/datetimeshow',
           name:'datetimeshow',
           component: resolve => require(['../pages/datetimeshow'],resolve),
         },
-      	{
-      		path:'',
-      		redirect:'/home'
-      	}
-      ]
+        {
+          path:'',
+          redirect:'/index'
+        }
+];
+// 命名路由
+(function(){
+  _childRouterConfig.map(function (route) {
+      route.components = route.components || {};
+      route.components.headerRouterView = route.components.headerRouterView || (resolve => require(['../pages/common/routerSnippet/baseHeader'], resolve));
+      route.components.default = route.component;
+      route.components.footerRouterView = route.components.footerRouterView || (resolve => require(['../pages/common/routerSnippet/baseFooter'], resolve));
+      return route
+    });
+})();
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      component: childRouterView,
+      children:_childRouterConfig
     },
     {
       path: '/page404',

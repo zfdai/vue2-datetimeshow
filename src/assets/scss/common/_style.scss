@@ -2,6 +2,7 @@
 @import "./keyframes";
 @import "./mixin";
 
-a{
-	color:$abase;
+// 公共
+.center-flex{
+	@include mx-center;
 }

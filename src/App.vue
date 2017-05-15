@@ -13,12 +13,9 @@ export default {
 
 <style>
 #app {
-  font-family: Verdana, Arial, 宋体;
-  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
+  font-family: Verdana, Arial, Microsoft YaHe;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

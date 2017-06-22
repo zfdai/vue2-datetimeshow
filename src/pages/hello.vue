@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <p class="test">test</p>
     <img src="../assets/img/logo.png">
     <!-- 日期功能页面start -->
     <p>
@@ -12,9 +13,13 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   @import 'src/assets/scss/common/variable';
+  @import '../assets/scss/test';
   p{
     color:$abase;
   }
+</style>
+<style scoped>
+  @import '../assets/scss/test.css';
 </style>
 <script>
 import api_url from '@src/config/url'
@@ -26,7 +31,7 @@ export default {
   },
   created(){
     // 初始化数据
-   this.init();
+   // this.init();
   },
   methods:{
     init(){

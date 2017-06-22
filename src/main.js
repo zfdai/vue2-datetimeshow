@@ -10,7 +10,7 @@ axiosConfig.init();
 // 公共css
 import './assets/scss/common/_reset.scss'
 import './assets/scss/common/_style.scss'
-// 饿了么 
+// 饿了么
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 Vue.use(ElementUI);

@@ -24,7 +24,7 @@
 	}
 </style>
 <script>
-	import leftMenu from '@src/components/menu/leftMenu'
+	import leftMenu from '@src/pages/common/routerSnippet/leftMenu'
 	export default {
 		components:{
 			leftMenu

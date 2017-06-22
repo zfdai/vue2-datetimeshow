@@ -17,6 +17,16 @@ let _childRouterConfig = [
           component: resolve => require(['../pages/datetimeshow'],resolve),
         },
         {
+          path:'/hello',
+          name:'hello',
+          component: resolve => require(['../pages/hello'],resolve),
+        },
+        {
+          path:'/select2',
+          name:'select2',
+          component: resolve => require(['../pages/select2'],resolve),
+        },
+        {
           path:'',
           redirect:'/index'
         }
@@ -28,7 +38,6 @@ let _childRouterConfig = [
       route.components.headerRouterView = route.components.headerRouterView || (resolve => require(['../pages/common/routerSnippet/baseHeader'], resolve));
       route.components.default = route.component;
       route.components.footerRouterView = route.components.footerRouterView || (resolve => require(['../pages/common/routerSnippet/baseFooter'], resolve));
-      return route
     });
 })();
 export default new Router({

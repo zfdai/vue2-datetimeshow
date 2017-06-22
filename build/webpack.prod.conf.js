@@ -71,6 +71,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function (module, count) {
+        console.log(module.resource)
         // any required modules inside node_modules are extracted to vendor
         return (
           module.resource &&
@@ -78,14 +79,65 @@ var webpackConfig = merge(baseWebpackConfig, {
           module.resource.indexOf(
             path.join(__dirname, '../node_modules')
           ) === 0
+          &&module.resource.indexOf('vue') === -1
+          &&module.resource.indexOf('jquery') === -1
+          &&module.resource.indexOf('element-ui') === -1
         )
       }
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vue',
+      minChunks: function (module, count) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /\.js$/.test(module.resource) &&
+            module.resource.indexOf('vue') !== -1
+        )
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'element-ui',
+      minChunks: function (module, count) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /\.js$/.test(module.resource) &&
+          module.resource.indexOf('element-ui') !== -1
+        )
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'jquery',
+      minChunks: function (module, count) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /\.js$/.test(module.resource) &&
+          module.resource.indexOf('jquery') !== -1
+        )
+      }
+    }),
+    // split vendor js into its own file
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   minChunks: function (module, count) {
+    //     console.log(module.resource)
+    //     // any required modules inside node_modules are extracted to vendor
+    //     return (
+    //       module.resource &&
+    //       /\.js$/.test(module.resource) &&
+    //       module.resource.indexOf(
+    //         path.join(__dirname, '../node_modules')
+    //       ) === 0
+    //     )
+    //   }
+    // }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
-      chunks: ['vendor']
+      chunks: ['jquery','element-ui','vendor','vue']
     }),
     // copy custom static assets
     new CopyWebpackPlugin([

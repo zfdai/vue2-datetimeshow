@@ -1,6 +1,6 @@
 <template>
 	<div class="zf-select2 relative" v-clickoutside="clickoutside" :class="className" :style="styleObj">
-		<div class="select2-wrapper" :class="{focus:isFocus,multiple:multiple}" @click="toggleMenu">
+		<div class="select2-wrapper" :class="{focus:isFocus,multiple:multiple}" @click.stop="toggleMenu">
 			<span class="tag" v-for="(item,index) in multipleList">
 				{{item.label}}
 				<em class="mult-clear" @click.stop="multClear(index)">x</em>
@@ -15,7 +15,7 @@
 			type="text"/>
 			<i class="down-arrow" :class="{open:showDropdown}" v-if="!remote"></i>
 			<i class="icon-clear" :class="{dropdown:!remote}" v-if="showClearable">
-				<span @click.stop="clearQuery">x</span>
+				<span @click="clearQuery">x</span>
 			</i>
 		</div>
 		<transition name="fade">
@@ -63,10 +63,12 @@
 		font-style: normal;
 		padding:5px;
 		border-radius: 4px;
-		font-size: 12px;
-		background: #e9eaec;
+		font-size: 14px;
+		color:#555;
+		background: #F1F3F5;
 	}
 	.multiple .tag .mult-clear{
+		font-style: normal;
 		margin-left: 5px;
 		display: inline-block;
 		transition: background .2s , color .2s;
@@ -190,8 +192,9 @@
 	}
 	input{
 		line-height: 1.5;
-		padding:0 7px;
+		padding:4px 7px;
 		height: 38px;
+	    box-sizing: border-box;
 		border:none;
 		color:#657180;
 	}
@@ -225,7 +228,7 @@
 		data(){
 			return{
 				isDebug:false,
-				labelValueFirst:true,
+				// labelValueFirst:true,
 				isInitValue:true,
 				// 多选列表
 				multipleList:[],
@@ -236,6 +239,8 @@
 				noQuery:false,
 				// 是否为脏数据
 				isDirty:false,
+				// 是否设置脏数据
+				dirtyFlag:false,
 				noFilterData:'没有查找到数据！',
 				noMoreData:'没有更多数据了！',
 				// 表态数据
@@ -261,7 +266,7 @@
 		mounted(){
 			if(this.remote&&this.listenScroll){
 				this.listenScrollMethod();
-			}
+			} 
 		},
 		computed:{
 			multipleListVal:function(){
@@ -285,6 +290,10 @@
 			},
 			initLabelValue:{
 				type: Array
+			},
+			outsideNoClear:{
+				type: Boolean,
+				default:false
 			},
 			multiple:{
                 type: Boolean,
@@ -330,6 +339,7 @@
 				this.isDebug&&console.log('multClear...')
 				this.multipleList.splice(index,1);
 				this.isInitValue = false;
+
 				this.$emit('input',this.multipleListVal);
 				this.$nextTick(_=>{
 					this.isInitValue = true;
@@ -398,6 +408,7 @@
 				this.prevData = null;
 				// 清空时  不再显示下拉
 				this.$nextTick(()=>{
+					this.isDirty = false;
 					this.isClear = false;
 					this.isInitValue = true;
 				})
@@ -406,36 +417,44 @@
 				this.isDebug&&console.log('clickoutside...')
 				this.isFocus = false;
 				this.showDropdown = false;
+				this.noQuery = true;
+				this.isInitValue = false;
 				// 脏数据时  赋值前一次值
 				this.isDebug&&console.log('this.isDirty',this.isDirty)
 				if(this.isDirty){
-					this.noQuery = true;
-					this.isInitValue = false;
-					if(this.multiple){
+					if(this.multiple&&!this.outsideNoClear){
 						this.query = '';
 					}else{
-						if(this.prevData){
-							this.query = this.prevData.label;
-							this.$emit('input',this.prevData.value);
-						}else{
-							this.query = '';
-							this.$emit('input','');
+						if(!this.outsideNoClear){
+							if(this.prevData){
+								this.query = this.prevData.label;
+								this.$emit('input',this.prevData.value);
+							}else{
+								this.query = '';
+								this.$emit('input','');
+							}
 						}
 					}
-					this.$nextTick(()=>{
-						this.isInitValue = true;
-						this.noQuery = false;
-					})
+				}else{
+					//多选时 原先输入的有值 ，点击 取消
+					if(this.multiple&&this.query&&!this.outsideNoClear){
+						this.query = '';
+					}
 				}
+				this.$nextTick(()=>{
+					this.isInitValue = true;
+					this.noQuery = false;
+					this.isDirty = false;
+				})
 			},
 			toggleMenu(e){
 				this.isDebug&&console.log('toggleMenu...')
 				this.isFocus = true;
 				this.setQuery();
-				if(this.multiple&&this.filterable&&!this.showDropdown){
-					setTimeout(()=>{
+				if(this.multiple&&this.filterable){
+					this.$nextTick(_=>{
 						e.target.parentNode.querySelectorAll('input')[0].focus();
-					},10)
+					});
 				}
 				if(!this.remote){
 					this.showDropdown = !this.showDropdown;
@@ -452,10 +471,8 @@
 				if(!this.multiple){
 					this.isFocus = false;
 					this.prevData = item;
-					this.showDropdown = false;
 					this.$emit('input',item.value)
 					this.$emit('on-change',item,this.backParamsData);
-					this.isDirty = false;
 				}else{
 					let _is_exist = false;
 					this.multipleList.forEach((item2,index2)=>{
@@ -470,16 +487,22 @@
 					//传递数据到父组件 
 					this.$emit('input',this.multipleListVal)
 					this.$emit('on-change',this.multipleList,this.backParamsData);
-					// 点击之后 赋值所有
+					// 点击之后 聚焦
 					if(this.filterable){
 						// if(!this.remote){
 						// 	// this.filterOptions = this.staticOpts;
 						// }
 						this.$el.querySelectorAll('input')[0].focus();
 					}
+					//多选时 原先输入的有值 ，点击 取消
+					if(this.query){
+						this.query = '';
+					}
 				}
+				this.showDropdown = false;
 				this.$nextTick(()=>{
 					this.noQuery = false;
+					this.isDirty = false;
 					this.isInitValue = true;
 				})
 			},
@@ -489,7 +512,6 @@
 				if(this.query){
 					this.filterOptions = list.filter(item=>item.label.toLowerCase().indexOf(this.query.toLowerCase())>-1);
 				}
-
 			},
 			// 初始化多选 -静态数据
 			initMult(val){
@@ -510,22 +532,27 @@
 				})
 				this.$nextTick(()=>{
 					this.noQuery = false;
+					this.isDirty = false;
 				})
 			},
-			// 搜索 初始化
+			// 搜索 初始化监听父组件属性值一直在变化
 			labelValue(val){
 				this.isDebug&&console.log('labelValue...',val)
-				this.isInitValue = true;
-				this.noQuery = true;
-				this.isDirty = false;
-				if(this.prevData) {
-					return;
-				}
+				// console.log('labelValueFirst...',val[0]&&val[0].label)
+				// console.log('this.labelValueFirs...',this.labelValueFirst)
+				// if(!this.labelValueFirst) {
+				// 	this.isInitValue = false;
+				// 	return;
+				// }
 				if(this.multiple&&val.length>0){
 					this.multipleList = JSON.parse(JSON.stringify(val));
+					this.isInitValue = false;
 					this.$emit('input',this.multipleListVal)
-					
+					this.$nextTick(_=>{
+						this.isInitValue = true;
+					})
 				}else{
+					this.noQuery = true;
 					if(val instanceof Array && val.length>0){
 						this.query = val[0].label;
 						this.$emit('input',val[0].value)
@@ -533,20 +560,27 @@
 						this.prevData = val[0];
 						// console.log('prevData',this.prevData)
 					}
+					this.$nextTick(()=>{
+						this.noQuery = false;
+						this.isDirty = false;
+					})
 				}
-				this.$nextTick(_=>{
-					this.isInitValue = true;
-					this.noQuery = false;
-					this.isDirty = false;
-				})
-				console.log(this.prevData)
+				// this.$nextTick(()=>{
+				// 	this.labelValueFirst = false;
+				// })
 			}
 		},
 		watch:{
 			// 监听 搜索 初始化
-			initLabelValue:function(val){
-				this.isDebug&&console.log('watch-initLabelValue...')
-				this.labelValue(JSON.parse(JSON.stringify(val)));
+			initLabelValue:function(val,oldVal){
+				this.isDebug&&console.log('watch-initLabelValue...',val)
+				// console.log('new ',val[0]&&val[0].label)
+				// console.log('oldVal ',oldVal)
+				//当initLabelValue直接写数组时会一直监听
+				if(oldVal.length==0||(val[0]&&oldVal[0]&&val[0].value!=oldVal[0].value)){
+					// console.log('...',val)
+					this.labelValue(JSON.parse(JSON.stringify(val)));
+				}
 			},
 			value:function(val){
 				this.isDebug&&console.log('watch-value...')
@@ -574,6 +608,7 @@
 						this.query = '';
 						this.prevData = null;
 					}
+					this.isInitValue = false;
 				}
 			},
 			// 列表值监听
@@ -600,13 +635,13 @@
 			},
 			query:function(val){
 				this.isDebug&&console.log('watch-query...')
-				console.log('query:',val)
-				if(!this.isInitValue){
-					this.isDirty = true;
-				}
+				// console.log('query isInitValue',this.isInitValue)
+				this.isDirty = true;
 				this.isDebug&&console.log('watch-query...this.isInitValue',this.isInitValue)
 				this.isDebug&&console.log('watch-query...',this.isDirty)
-				// console.log('this.noQuery',this.noQuery)
+				if(this.outsideNoClear){
+					this.$emit('input',this.query);
+				}
 				// query 赋值时不进行监听
 				if(this.noQuery)return;
 				if(val){
@@ -615,7 +650,11 @@
 						this.filterOptions = [];
 						this.$nextTick(()=>{
 							this.showDropdown = true;
+							// if(this.multiple){
+								this.isDataOver = false;
+							// }
 							this.$emit('remote-mothed',val,this.backParamsData);
+
 						})
 					}else{
 						// 死数据

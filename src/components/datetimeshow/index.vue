@@ -1,5 +1,5 @@
 <template>
-  <div class="datetimeshow">
+  <div class="datetimeshow" v-clickoutside="clickoutside">
 	  	<div class="zf-header">
 	  		<i class="iconfont iconfont-fanhui arrows" @click="prevMonth"></i>
 	  		<div class="zf-years">
@@ -262,8 +262,10 @@
   	}
 </style>
 <script>
-import domTool from '../../tool/domOperate'
+import domTool from './domOperate'
+import clickoutside from './clickoutside.js'
 export default {
+	directives: { clickoutside },
 	props:['type'],
   	data () {
 	    return {
@@ -497,6 +499,10 @@ export default {
     		this.datetime.setMonth(month-1);
     		this.initDate();
     		this.$emit('monthchange',month);
+    	},
+    	clickoutside(){
+    		this.isShowChooseMonths = false;
+    		this.isShowChooseYears = false;
     	}
   	},
   	watch:{

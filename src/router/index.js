@@ -17,16 +17,6 @@ let _childRouterConfig = [
           component: resolve => require(['../pages/datetimeshow'],resolve),
         },
         {
-          path:'/hello',
-          name:'hello',
-          component: resolve => require(['../pages/hello'],resolve),
-        },
-        {
-          path:'/select2',
-          name:'select2',
-          component: resolve => require(['../pages/select2'],resolve),
-        },
-        {
           path:'',
           redirect:'/index'
         }

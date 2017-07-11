@@ -1,5 +1,3 @@
-import Select from './select.vue';
-import Option from './option.vue';
-import OptionGroup from './option-group.vue';
+import Select2 from './index.vue';
 
-export { Select, Option, OptionGroup };
+export { Select2 };

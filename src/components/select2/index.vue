@@ -190,7 +190,7 @@
 	}
 	input{
 		line-height: 1.5;
-		padding:4px 7px;
+		padding:0 7px;
 		height: 38px;
 		border:none;
 		color:#657180;
@@ -340,15 +340,16 @@
 				this.isDebug&&console.log('listenScrollMethod...')
 				// console.log('select2-scroll...')
 				// console.log(this.$el.querySelectorAll('.select2-options'));
-				let _scrollWrap = this.$el.querySelectorAll('.select2-options')[0],
-					_contentWrap = _scrollWrap.querySelectorAll('ul')[0]||{};
+				let _scrollWrap = this.$el.querySelectorAll('.select2-options')[0];
+					// _contentWrap = _scrollWrap.querySelectorAll('ul')[0]||{};
 				_scrollWrap.onscroll = (e)=>{
+					let _this = e.target;
 					// console.log('scroll-evt...')
 					// console.log('e.target.scrollTop',e.target.scrollTop)
-					// console.log('_scrollWrap.clientHeight',_scrollWrap.clientHeight)
-					// console.log('_contentWrap.clientHeight',_contentWrap.clientHeight)
-					if(e.target.scrollTop+_scrollWrap.clientHeight==_contentWrap.clientHeight){
-						if(!this.isDataOver){
+					// console.log('e.target.clientHeight',e.target.clientHeight)
+					// console.log('e.target.scrollHeight',e.target.scrollHeight)
+					if(_this.scrollTop+_this.clientHeight==_this.scrollHeight){
+						if(!this.isDataOver&&!this.isLoading){
 							this.$emit('scrollBottom',this.filterOptions,this.query,this.dataOver,this.backParamsData)
 						}
 					}
@@ -486,8 +487,9 @@
 			filterList(list){
 				this.isDebug&&console.log('filterList...')
 				if(this.query){
-					list.filter(item=>item.label.toLowerCase().indexOf(this.query.toLowerCase())>-1);
+					this.filterOptions = list.filter(item=>item.label.toLowerCase().indexOf(this.query.toLowerCase())>-1);
 				}
+
 			},
 			// 初始化多选 -静态数据
 			initMult(val){
@@ -513,19 +515,17 @@
 			// 搜索 初始化
 			labelValue(val){
 				this.isDebug&&console.log('labelValue...',val)
-				if(!this.labelValueFirst) {
-					this.isInitValue = false;
+				this.isInitValue = true;
+				this.noQuery = true;
+				this.isDirty = false;
+				if(this.prevData) {
 					return;
 				}
 				if(this.multiple&&val.length>0){
 					this.multipleList = JSON.parse(JSON.stringify(val));
-					this.isInitValue = false;
 					this.$emit('input',this.multipleListVal)
-					this.$nextTick(_=>{
-						this.isInitValue = true;
-					})
+					
 				}else{
-					this.noQuery = true;
 					if(val instanceof Array && val.length>0){
 						this.query = val[0].label;
 						this.$emit('input',val[0].value)
@@ -533,12 +533,13 @@
 						this.prevData = val[0];
 						// console.log('prevData',this.prevData)
 					}
-					this.$nextTick(()=>{
-						this.noQuery = false;
-						this.isDirty = false;
-					})
 				}
-				this.labelValueFirst = false;
+				this.$nextTick(_=>{
+					this.isInitValue = true;
+					this.noQuery = false;
+					this.isDirty = false;
+				})
+				console.log(this.prevData)
 			}
 		},
 		watch:{
@@ -599,6 +600,7 @@
 			},
 			query:function(val){
 				this.isDebug&&console.log('watch-query...')
+				console.log('query:',val)
 				if(!this.isInitValue){
 					this.isDirty = true;
 				}

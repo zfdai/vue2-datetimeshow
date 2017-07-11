@@ -7,7 +7,7 @@ let axiosConfig = {
         axios.defaults.baseURL = globalConfig.apiConfig.originUrl;
         axios.interceptors.request.use(function (config) {
             // console.log('config',config);
-            config.headers.common['Authorization'] = 'Token 32fa3e092e54590d8a762577516bcfd6923c7f24';
+            config.headers.common['Authorization'] = 'Token 68372d33335d02c34a316494d9afdd096687f65f';
             // Do something before request is sent
             return config;
         }, function (error) {

@@ -382,7 +382,7 @@
 			}
 		},
 		methods:{
-			change(item){
+			change(item,backParamsData){
 				console.log('item',item)
 			},
 			getListData(cb){
@@ -401,8 +401,8 @@
 			        this.loading = false;
 			    })
 			},
-			scrollBottom(filterOptions,query,dataOverCb){
-				console.log(this)
+			scrollBottom(filterOptions,query,dataOverCb,backParamsData){
+				// console.log(this)
 				this.params.page++;
 				this.params.search=query;
 				this.getListData((res)=>{
@@ -424,7 +424,7 @@
 					this.optionsList = res;
 				})
 			},
-			remoteMethod(query){
+			remoteMethod(query,backParamsData){
 				this.loading = true;
 				this.params.page = 1;
 				this.params.search = query;
